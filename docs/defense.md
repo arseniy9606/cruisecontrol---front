@@ -7,7 +7,7 @@
 3. В плитке показать «Автомобиль без медиа» с изображением по умолчанию; поля image_url и video_url этой записи пустые (скриншот 3).
 4. Открыть http://localhost:3000/fuel_consumptions/feed/5: показать DefaultVideo.mp4 и локальные пути по умолчанию (скриншот 4).
 5. Показать ConsumptionFilter.tsx: тип Props, value, onApply, состояние draft, Form onSubmit, preventDefault и проверку границ (скриншот 5).
-6. Показать App.tsx: range/useState, отбор по consumption_rate, props automobiles/range/onApply. Проверить 8–13 → внедорожник, микроавтобус и карточка без медиа; 90–100 → пустой список; сброс → 5 карточек (скриншот 6).
+6. Показать App.tsx: range/useState, отбор по consumption_rate, props automobiles/range/onApply. Проверить 8–13 → внедорожник, микроавтобус и карточка без медиа; 59–60 → пустой список; сброс → 5 карточек (скриншот 6).
 7. Показать useState в App, фильтре, FuelImage и ленте. Объяснить отдельное состояние редактируемого и применённого диапазона, раскрытия описания и ошибки медиа (скриншот 7).
 8. Показать useEffect, useParams и useNavigate в FuelFeedPage и useLocation в TabBar: ID из URL, переход к следующему, сброс описания, заголовок вкладки и cleanup. В StrictMode эффекты в разработке дополнительно проверяются повторным запуском (скриншот 8).
 9. Показать README: две страницы, кнопки, поля, меню, запуск и ветка (скриншот 9).

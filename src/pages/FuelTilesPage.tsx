@@ -13,14 +13,23 @@ export default function FuelTilesPage({ automobiles, range, onApply }: Props) {
   return (
     <main className="tiles-page">
       <header>
-        <p className="eyebrow">КАТАЛОГ АВТОМОБИЛЕЙ</p>
-        <h1>Расход топлива</h1>
-        <p className="intro">Выберите автомобиль для поездки</p>
+        <p className="eyebrow">ВЫБИРАЙТЕ СВОЙ РИТМ</p>
+        <h1>
+          Автомобили
+          <br />
+          для ваших поездок
+        </h1>
       </header>
       <ConsumptionFilter value={range} onApply={onApply} />
-      <p className="result-count" role="status">
-        Найдено автомобилей: {automobiles.length}
-      </p>
+      <div className="section-heading">
+        <h2>Все автомобили</h2>
+        <span
+          role="status"
+          aria-label={`Найдено автомобилей: ${automobiles.length}`}
+        >
+          {automobiles.length}
+        </span>
+      </div>
       {automobiles.length ? (
         <div className="tiles">
           {automobiles.map((automobile) => (

@@ -5,6 +5,7 @@ import type { FuelConsumption } from "../modules/fuel_consumptions";
 import { formatFuel } from "../modules/fuel_consumptions";
 import { FUEL_TILES, fuelFeedPath } from "../Routes";
 import { DEFAULT_IMAGE, DEFAULT_VIDEO } from "../components/FuelImage";
+import CarIcon from "../components/CarIcon";
 interface Props {
   automobiles: FuelConsumption[];
 }
@@ -44,7 +45,6 @@ export default function FuelFeedPage({ automobiles }: Props) {
         muted
         loop
         playsInline
-        controls
         poster={automobile.image_url || DEFAULT_IMAGE}
         src={
           videoFailed || !automobile.video_url
@@ -54,28 +54,36 @@ export default function FuelFeedPage({ automobiles }: Props) {
         onError={() => setVideoFailed(true)}
         aria-label={`Видео: ${automobile.name}`}
       />
-      <div className="feed-top">
-        <span>В движении</span>
-        <span>
-          {automobiles.indexOf(automobile) + 1} / {automobiles.length}
-        </span>
-      </div>
-      <div className="feed-facts">
+      <aside className="feed-facts" aria-label="Параметры автомобиля">
         <div>
+          <CarIcon name="tank" />
+          <strong>
+            {automobile.fuel_tank_volume.toLocaleString("ru-RU", {
+              minimumFractionDigits: 1,
+              maximumFractionDigits: 1,
+            })}
+          </strong>
+          <small>объём бака, л</small>
+        </div>
+        <div>
+          <CarIcon name="fuel" />
           <strong>{formatFuel(automobile.consumption_rate)}</strong>
-          <span>л/100 км</span>
+          <small>л/100 км</small>
         </div>
-        <div>
-          <strong>{formatFuel(automobile.fuel_tank_volume)}</strong>
-          <span>бак, л</span>
+        <div aria-label={`${automobile.likes_count} отметок нравится`}>
+          <CarIcon name="heart" />
+          <strong>{automobile.likes_count}</strong>
         </div>
-        <div>
-          <strong>♡ {automobile.likes_count}</strong>
-          <span>нравится</span>
-        </div>
-      </div>
+        <Button
+          className="next-car"
+          aria-label="Следующий автомобиль"
+          title="Следующий автомобиль"
+          onClick={() => navigate(fuelFeedPath(next.id))}
+        >
+          <CarIcon name="next" />
+        </Button>
+      </aside>
       <section className="feed-description">
-        <p className="eyebrow">РАСХОД ТОПЛИВА</p>
         <h1>{automobile.name}</h1>
         <p className={expanded ? "" : "clamped"}>{automobile.description}</p>
         <Button
@@ -84,13 +92,7 @@ export default function FuelFeedPage({ automobiles }: Props) {
           onClick={() => setExpanded(!expanded)}
           aria-expanded={expanded}
         >
-          {expanded ? "Меньше" : "Больше"}
-        </Button>
-        <Button
-          className="next-car"
-          onClick={() => navigate(fuelFeedPath(next.id))}
-        >
-          Следующий автомобиль ↓
+          {expanded ? "Меньше" : "Ещё"}
         </Button>
       </section>
     </main>
