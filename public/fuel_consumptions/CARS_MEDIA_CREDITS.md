@@ -8,3 +8,7 @@
 - `cars_minibus.mp4` и `.jpg`: K (Kelly). https://www.pexels.com/video/a-man-washing-a-commuter-van-in-the-yard-3978612/
 - `cars_truck.mp4` и `.jpg`: EJ Merl. https://www.pexels.com/video/a-semi-truck-is-driving-down-the-road-17899033/
 - `cars_suv.mp4` и `.jpg`: Stanislav Gaberov. https://www.pexels.com/video/off-road-car-driving-on-the-dirt-road-6272119/ . 1920×1080, около 7 секунд из исходного ролика, без изменения пропорций.
+
+## Резервное видео ЛР5
+
+`public/DefaultVideo.mp4` создано для проекта: нейтральный фон, векторный значок камеры и надпись «Видео отсутствует». Трёхсекундная анимация, 720×1280, 24 кадра/с, H.264, без звука. Кадры автомобильных роликов в нём не используются.
