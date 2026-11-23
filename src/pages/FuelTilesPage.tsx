@@ -1,15 +1,25 @@
-import type {
-  FuelConsumption,
-  FuelConsumptionRange,
-} from "../modules/fuel_consumptions";
+import { useEffect } from "react";
+import type { FuelConsumptionRange } from "../modules/fuel_consumptions";
 import ConsumptionFilter from "../components/ConsumptionFilter";
 import FuelConsumptionCard from "../components/FuelConsumptionCard";
-interface Props {
-  automobiles: FuelConsumption[];
-  range: FuelConsumptionRange;
-  onApply: (range: FuelConsumptionRange) => void;
-}
-export default function FuelTilesPage({ automobiles, range, onApply }: Props) {
+import { useFuelDispatch, useFuelSelector } from "../store";
+import { applyFuelFilterRange } from "../store/fuelConsumptionsSlice";
+import { loadFuelConsumptions } from "../store/fuelConsumptionThunks";
+
+export default function FuelTilesPage() {
+  const dispatch = useFuelDispatch();
+  const { automobiles, appliedRange } = useFuelSelector((state) => state.fuelConsumptions);
+  const login = useFuelSelector((state) => state.fuelUser.login);
+
+  useEffect(() => {
+    const request = dispatch(loadFuelConsumptions());
+    return () => request.abort();
+  }, [dispatch, login, appliedRange]);
+
+  function applyFilter(range: FuelConsumptionRange) {
+    dispatch(applyFuelFilterRange(range));
+  }
+
   return (
     <main className="tiles-page">
       <header>
@@ -20,20 +30,19 @@ export default function FuelTilesPage({ automobiles, range, onApply }: Props) {
           для ваших поездок
         </h1>
       </header>
-      <ConsumptionFilter value={range} onApply={onApply} />
+      <ConsumptionFilter onApply={applyFilter} />
       <div className="section-heading">
         <h2>Все автомобили</h2>
-        <span
-          role="status"
-          aria-label={`Найдено автомобилей: ${automobiles.length}`}
-        >
-          {automobiles.length}
-        </span>
+        {automobiles && (
+          <span role="status" aria-label={`Найдено автомобилей: ${automobiles.length}`}>
+            {automobiles.length}
+          </span>
+        )}
       </div>
-      {automobiles.length ? (
+      {automobiles && (automobiles.length ? (
         <div className="tiles">
           {automobiles.map((automobile) => (
-            <FuelConsumptionCard key={automobile.id} automobile={automobile} />
+            <FuelConsumptionCard key={automobile.id} automobile={automobile} canDelete={!!login && automobile.is_owner} />
           ))}
         </div>
       ) : (
@@ -41,7 +50,7 @@ export default function FuelTilesPage({ automobiles, range, onApply }: Props) {
           <h2>Автомобили не найдены</h2>
           <p>Измените диапазон расхода или сбросьте фильтр.</p>
         </div>
-      )}
+      ))}
     </main>
   );
 }

@@ -1,5 +1,5 @@
 import type { FuelConsumption } from "./fuel_consumptions";
-// Только локальные данные: запросов к API, БД и S3 в ЛР5 нет.
+// Гостевые данные для работы при недоступном API.
 export const FUEL_CONSUMPTIONS_MOCK: FuelConsumption[] = [
   {
     id: 1,
@@ -10,6 +10,8 @@ export const FUEL_CONSUMPTIONS_MOCK: FuelConsumption[] = [
     fuel_tank_volume: 50,
     image_url: "/fuel_consumptions/cars_sedan.jpg",
     video_url: "/fuel_consumptions/cars_sedan.mp4",
+    is_owner: false,
+    liked: false,
     likes_count: 12,
   },
   {
@@ -21,6 +23,8 @@ export const FUEL_CONSUMPTIONS_MOCK: FuelConsumption[] = [
     fuel_tank_volume: 80,
     image_url: "/fuel_consumptions/cars_suv.jpg",
     video_url: "/fuel_consumptions/cars_suv.mp4",
+    is_owner: false,
+    liked: false,
     likes_count: 8,
   },
   {
@@ -32,6 +36,8 @@ export const FUEL_CONSUMPTIONS_MOCK: FuelConsumption[] = [
     fuel_tank_volume: 75,
     image_url: "/fuel_consumptions/cars_minibus.jpg",
     video_url: "/fuel_consumptions/cars_minibus.mp4",
+    is_owner: false,
+    liked: false,
     likes_count: 15,
   },
   {
@@ -43,6 +49,8 @@ export const FUEL_CONSUMPTIONS_MOCK: FuelConsumption[] = [
     fuel_tank_volume: 600,
     image_url: "/fuel_consumptions/cars_truck.jpg",
     video_url: "/fuel_consumptions/cars_truck.mp4",
+    is_owner: false,
+    liked: false,
     likes_count: 21,
   },
   {
@@ -54,6 +62,8 @@ export const FUEL_CONSUMPTIONS_MOCK: FuelConsumption[] = [
     fuel_tank_volume: 55,
     image_url: "",
     video_url: "",
+    is_owner: false,
+    liked: false,
     likes_count: 0,
   },
 ];

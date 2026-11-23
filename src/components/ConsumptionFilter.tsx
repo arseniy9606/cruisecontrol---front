@@ -1,13 +1,15 @@
-import { useState, type FormEvent } from "react";
+import type { FormEvent } from "react";
 import { Button, Form } from "react-bootstrap";
 import type { FuelConsumptionRange } from "../modules/fuel_consumptions";
 import { formatFuel } from "../modules/fuel_consumptions";
+import { useFuelDispatch, useFuelSelector } from "../store";
+import { emptyFuelRange, setFuelFilterRange } from "../store/fuelConsumptionsSlice";
 interface Props {
-  value: FuelConsumptionRange;
   onApply: (range: FuelConsumptionRange) => void;
 }
-export default function ConsumptionFilter({ value, onApply }: Props) {
-  const [draft, setDraft] = useState(value);
+export default function ConsumptionFilter({ onApply }: Props) {
+  const dispatch = useFuelDispatch();
+  const { filterRange: draft, appliedRange: value } = useFuelSelector((state) => state.fuelConsumptions);
   const maximum = draft.maximum === "" ? 60 : Number(draft.maximum);
   const invalid = draft.minimum !== "" && Number(draft.minimum) > maximum;
   const active = value.minimum !== "" || value.maximum !== "";
@@ -30,7 +32,7 @@ export default function ConsumptionFilter({ value, onApply }: Props) {
           step="0.1"
           placeholder="0"
           value={draft.minimum}
-          onChange={(e) => setDraft({ ...draft, minimum: e.target.value })}
+          onChange={(e) => dispatch(setFuelFilterRange({ ...draft, minimum: e.target.value }))}
         />
         <Form.Label htmlFor="fuel-max">До</Form.Label>
         <output htmlFor="fuel-max">{formatFuel(maximum)}</output>
@@ -42,7 +44,7 @@ export default function ConsumptionFilter({ value, onApply }: Props) {
         max="60"
         step="0.1"
         value={maximum}
-        onChange={(e) => setDraft({ ...draft, maximum: e.target.value })}
+        onChange={(e) => dispatch(setFuelFilterRange({ ...draft, maximum: e.target.value }))}
       />
       <div className="range-labels">
         <span>0</span>
@@ -62,9 +64,8 @@ export default function ConsumptionFilter({ value, onApply }: Props) {
           variant="link"
           type="button"
           onClick={() => {
-            const empty = { minimum: "", maximum: "" };
-            setDraft(empty);
-            onApply(empty);
+            dispatch(setFuelFilterRange(emptyFuelRange));
+            onApply(emptyFuelRange);
           }}
         >
           Сбросить фильтр

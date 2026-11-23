@@ -7,10 +7,12 @@ export interface FuelConsumption {
   image_url: string;
   video_url: string;
   likes_count: number;
+  is_owner: boolean;
+  liked: boolean;
 }
 export interface FuelConsumptionRange {
   minimum: string;
   maximum: string;
 }
 export const formatFuel = (value: number) =>
-  value.toLocaleString("ru-RU", { maximumFractionDigits: 1 });
+  value.toLocaleString("ru-RU", { maximumFractionDigits: 2 });

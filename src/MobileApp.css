@@ -1,5 +1,4 @@
-/* Оформление ЛР2, адаптированное для гостевого React SPA ЛР5.
-   Яндекс Go: #FFCC00, #21201F, #FFFFFF; hover #F2C200. */
+/* Палитра интерфейса каталога автомобилей. */
 :root {
   --cars-yellow: #ffcc00;
   --cars-ink: #21201f;
@@ -540,4 +539,91 @@ h2 {
   * {
     transition: none !important;
   }
+}
+
+.fuel-form-page {
+  padding: 28px 22px 24px;
+}
+.fuel-form {
+  display: grid;
+  gap: 16px;
+  padding: 18px;
+  border-radius: 22px;
+  background: var(--cars-surface);
+}
+.fuel-form .form-label {
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+.fuel-form .form-control {
+  border-radius: 10px;
+  border-color: #dad8d4;
+}
+.fuel-form .form-control:focus {
+  border-color: #c99700;
+  box-shadow: 0 0 0 3px #ffcc0033;
+}
+.fuel-draft-media {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+.fuel-draft-media img,
+.fuel-draft-video {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  border-radius: 10px;
+  background: var(--cars-ink);
+}
+.fuel-card > a {
+  display: block;
+  color: inherit;
+}
+.fuel-card > a:focus-visible {
+  outline-offset: -3px;
+}
+.fuel-card-actions {
+  padding: 0 11px 12px;
+}
+.fuel-card-actions .btn {
+  width: 100%;
+}
+.feed-like {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  padding: 0;
+  color: white;
+  text-decoration: none;
+}
+.feed-like:hover,
+.feed-like:focus-visible {
+  color: var(--cars-yellow);
+}
+.feed-like[aria-pressed="true"] .car-icon {
+  color: var(--cars-yellow);
+  fill: currentColor;
+}
+.fuel-request-error {
+  position: fixed;
+  z-index: 12;
+  bottom: calc(var(--nav-height) + env(safe-area-inset-bottom) + 12px);
+  left: 50%;
+  width: min(calc(100% - 24px), 406px);
+  margin: 0;
+  transform: translateX(-50%);
+  box-shadow: 0 4px 12px #21201f1f;
+}
+.fuel-request-cover {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  width: min(100%, 430px);
+  margin-inline: auto;
+  display: grid;
+  place-items: center;
+  background: #21201f80;
+  color: var(--cars-yellow);
+  touch-action: none;
 }

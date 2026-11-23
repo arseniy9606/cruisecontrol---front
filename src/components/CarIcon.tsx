@@ -1,5 +1,5 @@
 type IconName =
-  "feed" | "add" | "tiles" | "login" | "tank" | "fuel" | "heart" | "next";
+  "feed" | "add" | "tiles" | "login" | "logout" | "tank" | "fuel" | "heart" | "next";
 const paths: Record<IconName, React.ReactNode> = {
   feed: (
     <>
@@ -21,6 +21,7 @@ const paths: Record<IconName, React.ReactNode> = {
       <path d="M14 3h6v18h-6M3 12h12m-5-5 5 5-5 5" />
     </>
   ),
+  logout: <path d="M10 3H4v18h6m0-9h11m-5-5 5 5-5 5" />,
   tank: <path d="M5 4h14v16H5zM8 4V2h8v2M8 9h8M9 16h6" />,
   fuel: (
     <path d="M4 21V4h9v17M2 21h13M4 10h9m0 3h3v5a2 2 0 0 0 4 0V8l-3-3M18 7l2 2" />

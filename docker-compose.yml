@@ -1,5 +1,8 @@
 services:
   fuel-consumptions:
     build: .
+    environment:
+      API_TARGET: ${API_TARGET:-http://host.docker.internal:8086}
+      S3_TARGET: ${S3_TARGET:-http://host.docker.internal:9300}
     ports:
       - "3000:3000"
